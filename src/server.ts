@@ -1,7 +1,7 @@
-import "./util/module-alias";
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import * as database from "./database/connection";
 dotenv.config();
 export class App {
   readonly port: number;
@@ -16,19 +16,26 @@ export class App {
     return this.app;
   }
   public async init(): Promise<void> {
+    this.setupExpress();
+    await this.databaseSetup();
+  }
+  public setupExpress(): void {
     this.app.use(bodyParser.json());
     this.app.use(express.json());
-    this.setupExpress();
     this.setupRoutes();
   }
-  public setupExpress(): void {}
+  public start(): void {
+    this.app.listen(this.port, () => {
+      console.info("Server listening on port: " + this.port);
+    });
+  }
   public setupRoutes(): void {
     //this.app.use(route);
   }
   private async databaseSetup(): Promise<void> {
-    //await database.connect();
+    await database.connect();
   }
   public async close(): Promise<void> {
-    //await database.close();
+    await database.close();
   }
 }

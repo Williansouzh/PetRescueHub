@@ -1,31 +1,32 @@
 {
-   "name": "petrescuehub",
-   "version": "1.0.0",
-   "description": "The backend for PetRescueHub, a platform designed for facilitating the adoption of abandoned animals.",
-   "main": "index.js",
-   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "ts-node src/index.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
-   },
-   "keywords": [],
-   "author": "",
-   "license": "ISC",
-   "dependencies": {
-      "@types/express": "^4.17.21",
-      "@types/module-alias": "^2.0.4",
-      "body-parser": "^1.20.2",
-      "dotenv": "^16.4.5",
-      "express": "^4.19.2",
-      "module-alias": "^2.2.3",
-      "pg": "^8.4.0",
-      "reflect-metadata": "^0.1.13",
-      "typeorm": "0.3.20",
-      "typescript": "^5.5.3"
-   },
-   "devDependencies": {
-      "@types/node": "^16.11.10",
-      "ts-node": "10.9.1",
-      "typescript": "4.5.2"
-   }
+  "name": "petrescuehub",
+  "version": "1.0.0",
+  "description": "The backend for PetRescueHub, a platform designed for facilitating the adoption of abandoned animals.",
+  "main": "index.js",
+  "scripts": {
+    "start:local": "ts-node-dev --transpile-only src/index.ts",
+    "typeorm": "ts-node-dev node_modules/.bin/typeorm"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/module-alias": "^2.0.4",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "module-alias": "^2.2.3",
+    "path": "^0.12.7",
+    "pg": "^8.4.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "0.3.20",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "4.5.2"
+  }
 }

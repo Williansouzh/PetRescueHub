@@ -1,14 +1,18 @@
-import { connect as mongooseConnect, connection } from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
-const MONGO_URL = process.env.MONGO_URL;
+import { AppDataSource } from "../data-source";
 export const connect = async (): Promise<void> => {
   try {
-    await mongooseConnect(MONGO_URL as string);
+    await AppDataSource.initialize();
     console.log("Database connected.");
   } catch (error) {
     console.log(error);
   }
 };
 
-export const close = (): Promise<void> => connection.close();
+export const close = async (): Promise<void> => {
+  try {
+    await AppDataSource.destroy();
+    console.log("Database connection closed.");
+  } catch (error) {
+    console.error("Failed to close database connection:", error);
+  }
+};
