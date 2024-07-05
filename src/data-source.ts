@@ -9,4 +9,7 @@ export const AppDataSource = new DataSource({
   username: process.env.TYPEORM_USERNAME,
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DATABASE,
+  migrations: [`${__dirname}/**/database/migrations/*.{ts,js}`], // Path to your migration files
+  entities: [`${__dirname}/**/entities/*.{ts,js}`], // Path to your entity files
+  // Remove the incorrect `migrationsDir` property
 });

@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import * as database from "./database/connection";
+import route from "./routes/userRoute";
 dotenv.config();
 export class App {
   readonly port: number;
@@ -30,7 +31,7 @@ export class App {
     });
   }
   public setupRoutes(): void {
-    //this.app.use(route);
+    this.app.use(route);
   }
   private async databaseSetup(): Promise<void> {
     await database.connect();
