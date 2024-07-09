@@ -10,13 +10,22 @@ export class UserRepository implements BaseRepository<User> {
   constructor(User: EntityTarget<User>) {
     this.ormRepository = AppDataSource.getRepository(User);
   }
-  async getById(id: string): Promise<User | null> {
-    return null;
+  public async getById(id: number): Promise<User | null> {
+    return this.ormRepository.findOne({ where: { id } });
   }
 
-  async getAll(): Promise<User[]> {
-    const users = await this.ormRepository.find();
-    return users;
+  public async findByEmail(email: string): Promise<User | null> {
+    return this.ormRepository.findOne({ where: { email } });
+  }
+  async getAll(
+    page: number,
+    limit: number
+  ): Promise<{ items: User[]; total: number }> {
+    const [users, total] = await this.ormRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+    return { items: users, total };
   }
 
   async create(item: User): Promise<User> {
