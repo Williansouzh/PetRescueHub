@@ -1,5 +1,5 @@
 // src/repositories/UserRepository.ts
-import { EntityTarget, Repository } from "typeorm";
+import { EntityTarget, MoreThan, Repository } from "typeorm";
 import { User } from "../entities/User";
 import { BaseRepository } from "./Baserepository";
 import { AppDataSource } from "@src/data-source";
@@ -9,6 +9,14 @@ export class UserRepository implements BaseRepository<User> {
 
   constructor(User: EntityTarget<User>) {
     this.ormRepository = AppDataSource.getRepository(User);
+  }
+  public async findByResetPasswordToken(token: string): Promise<User | null> {
+    return this.ormRepository.findOne({
+      where: {
+        resetPasswordToken: token,
+        resetPasswordExpires: MoreThan(new Date()),
+      },
+    });
   }
   public async getById(id: number): Promise<User | null> {
     return this.ormRepository.findOne({ where: { id } });

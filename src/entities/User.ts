@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id!: string;
 
   @Column()
   @IsEmail()
@@ -24,6 +24,11 @@ export class User {
     default: "adopter",
   })
   role!: string;
+  @Column({ nullable: true }) // Campo para armazenar o token de redefinição de senha
+  resetPasswordToken?: string;
+
+  @Column({ nullable: true }) // Campo para armazenar a data de expiração do token
+  resetPasswordExpires?: Date;
 
   @BeforeInsert()
   async hashPassword() {

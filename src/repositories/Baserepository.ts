@@ -1,7 +1,7 @@
 import { IRepository } from "../interfaces/IRepository";
 
 export abstract class BaseRepository<T> implements IRepository<T> {
-  abstract getById(id: number): Promise<T | null>;
+  abstract getById(id: string): Promise<T | null>;
   abstract getAll(
     page: number,
     limit: number
